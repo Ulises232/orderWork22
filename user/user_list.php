@@ -3,7 +3,7 @@
 	<div class="card card-outline card-success">
 		<div class="card-header">
 			<div class="card-tools">
-				<a class="btn btn-block btn-sm btn-default btn-flat border-primary" href="<?php echo SERVERURL ?>user/user_new/"><i class="fa fa-plus"></i> Add New User</a>
+				<a class="btn btn-block btn-sm btn-default btn-flat border-primary" href="<?php echo SERVERURL ?>user/new/"><i class="fa fa-plus"></i> Add New User</a>
 			</div>
 		</div>
 		<div class="card-body">
@@ -34,9 +34,9 @@
 									Action
 								</button>
 								<div class="dropdown-menu" style="">
-									<a class="dropdown-item" href="<?php echo SERVERURL ?>user/user_edit/<?php echo $row['id'] ?>">Edit</a>
+									<a class="dropdown-item" href="<?php echo SERVERURL ?>user/edit/<?php echo $row['id'] ?>">Edit</a>
 									<div class="dropdown-divider"></div>
-									<a class="dropdown-item delete_user" href="javascript:void(0)" data-id="<?php echo $row['id'] ?>">Delete</a>
+									<a class="dropdown-item" onclick="accionPaginas(' Are you sure to delete this user?','delete_user',<?php echo $row['id'] ?>)">Delete</a>
 								</div>
 							</td>
 						</tr>
@@ -49,10 +49,10 @@
 <script>
 	$(document).ready(function() {
 		$('#list').dataTable()
-		$('.delete_user').click(function() {
-			_conf("Are you sure to delete this user?", "delete_user", [$(this).attr('data-id')])
-		})
+
 	})
+
+
 
 	function delete_user($id) {
 		start_load()

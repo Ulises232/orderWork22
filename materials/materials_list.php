@@ -3,7 +3,7 @@
 	<div class="card card-outline card-success">
 		<div class="card-header">
 			<div class="card-tools">
-				<a class="btn btn-block btn-sm btn-default btn-flat border-primary" href="<?php echo SERVERURL ?>clients/clients_new/"><i class="fa fa-plus"></i>Add Client</a>
+				<a class="btn btn-block btn-sm btn-default btn-flat border-primary" href="<?php echo SERVERURL ?>materials/new/"><i class="fa fa-plus"></i>Add Client</a>
 			</div>
 		</div>
 		<div class="card-body">
@@ -37,9 +37,9 @@
 									Action
 								</button>
 								<div class="dropdown-menu">
-									<a class="dropdown-item" href="<?php echo SERVERURL ?>clients/clients_edit/<?php echo $row['id_cliente'] ?>">Edit</a>
+									<a class="dropdown-item" href="<?php echo SERVERURL ?>materials/edit/<?php echo $row['id_cliente'] ?>">Edit</a>
 									<div class="dropdown-divider"></div>
-									<a class="dropdown-item cliente_archivar" href="javascript:void(0)" data-id="<?php echo $row['id_cliente'] ?>">Archive</a>
+									<a class="dropdown-item" <a class="dropdown-item" onclick="accionPaginas('Are u sure archive the client?','cliente_archivar',<?php echo $row['id_cliente'] ?>)">Archive</a>
 								</div>
 							</td>
 						</tr>
@@ -55,9 +55,6 @@
 
 	})
 
-	$('.cliente_archivar').click(function() {
-		_conf("Seguro que deseas Archivar El cliente?", "cliente_archivar", [$(this).attr('data-id')])
-	})
 
 	function cliente_archivar($id) {
 		start_load()

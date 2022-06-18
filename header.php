@@ -8,8 +8,8 @@
 
     ob_start();
    if(isset($_GET['page'])){
-        $title = explode("/",  $_GET['page'])[1];
-        $title = str_replace("_", ' ', $title);
+        $title = explode("/",  $_GET['page']);
+        $title = $title[0]." ".$title[1] ;
         $title = ucwords($title);
     }else{
         $title = "Home";

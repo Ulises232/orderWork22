@@ -55,10 +55,10 @@ include 'header.php'
                     <?php
                     if (isset($_GET['page'])) {
                         $include = explode("/", $_GET['page']);
-                        if (!file_exists($include[0] . "/" . $include[1] . ".php")) {
+                        if (!file_exists($include[0] . "/" . $include[0]."_".$include[1] . ".php")) {
                             include '404.html';
                         } else {
-                            include $include[0] . "/" . $include[1] . ".php";
+                            include $include[0] . "/" . $include[0] . "_" . $include[1] . ".php";
                         }
                     }else{
                         include "home.php";

@@ -1,4 +1,4 @@
-function Edad(value, campo){
+function Edad(value, campo) {
     var hoy = new Date();
     var cumpleanos = new Date(value);
     var edad = hoy.getFullYear() - cumpleanos.getFullYear();
@@ -9,5 +9,14 @@ function Edad(value, campo){
     }
 
 
-    $('#'+campo).val(edad + " Old year");
+    $('#' + campo).val(edad + " Old year");
+}
+
+
+function modalEdicion(titulo,url,tamaño) {
+    uni_modal("<i class='fa fa-plus'></i>" + titulo, url, tamaño)
+}
+
+function accionPaginas(mensaje,funcion,parametros) {
+	_conf(mensaje , funcion , [parametros])
 }
