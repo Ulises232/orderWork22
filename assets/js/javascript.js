@@ -13,10 +13,32 @@ function Edad(value, campo) {
 }
 
 
-function modalEdicion(titulo,url,tamaño) {
+function modalEdicion(titulo, url, tamaño) {
     uni_modal("<i class='fa fa-plus'></i>" + titulo, url, tamaño)
 }
 
-function accionPaginas(mensaje,funcion,parametros) {
-	_conf(mensaje , funcion , [parametros])
+function accionPaginas(mensaje, funcion, parametros) {
+    _confArchivar(mensaje, funcion, parametros)
+}
+
+
+function archivar($url,$id,$accion) {
+    console.log($id);
+    start_load()
+    $.ajax({
+        url: $url+'ajax.php?action=' + $accion + '_archivar',
+        method: 'POST',
+        data: {
+            id: $id
+        },
+        success: function (resp) {
+            if (resp == 1) {
+                alert_toast("Data successfully deleted", 'success')
+                setTimeout(function () {
+                    location.reload()
+                }, 1500)
+
+            }
+        }
+    })
 }

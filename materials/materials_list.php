@@ -10,10 +10,10 @@
 			<table class="table tabe-hover table-bordered" id="list">
 				<thead>
 					<tr>
-						<th width="5%"  class="text-center">#</th>
-						<th width="15%" >ID Material</th>
-						<th width="70%" >Description</th>
-						<th width="10%" >Action</th>
+						<th width="5%" class="text-center">#</th>
+						<th width="15%">ID Material</th>
+						<th width="70%">Description</th>
+						<th width="10%">Action</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -33,7 +33,7 @@
 								<div class="dropdown-menu">
 									<a class="dropdown-item" href="<?php echo SERVERURL ?>materials/edit/<?php echo $row['id_material'] ?>">Edit</a>
 									<div class="dropdown-divider"></div>
-									<a class="dropdown-item" <a class="dropdown-item" onclick="accionPaginas('Are u sure archive the Material?','material_archivar',<?php echo $row['id_material'] ?>)">Archive</a>
+									<a class="dropdown-item" <a class="dropdown-item" onclick="accionPaginas('Are u sure archive the Material?','archivar',[<?php echo $row['id_material'] ?>,'material'])">Archive</a>
 								</div>
 							</td>
 						</tr>
@@ -48,25 +48,4 @@
 		$('#list').dataTable()
 
 	})
-
-
-	function material_archivar($id) {
-		start_load()
-		$.ajax({
-			url: '<?php echo SERVERURL ?>ajax.php?action=material_archivar',
-			method: 'POST',
-			data: {
-				id: $id
-			},
-			success: function(resp) {
-				if (resp == 1) {
-					alert_toast("Data successfully deleted", 'success')
-					setTimeout(function() {
-						location.reload()
-					}, 1500)
-
-				}
-			}
-		})
-	}
 </script>

@@ -36,7 +36,7 @@ if($action == 'update_user'){
 	if($save)
 		echo $save;
 }
-if($action == 'delete_user'){
+if($action == 'user_archivar'){
 	$save = $crud->delete_user();
 	if($save)
 		echo $save;
@@ -107,5 +107,37 @@ if ($action == 'material_archivar') {
 }
 
 /* FIN MATERIALES */
+
+
+/* CUARTOS  */
+
+if ($action == 'cuarto_guardar') {
+	$save = $crud->cuarto_guardar();
+	if ($save)
+		echo $save;
+}
+if ($action == 'cuarto_archivar') {
+	$save = $crud->cuarto_archivar();
+	if ($save)
+		echo $save;
+}
+
+/* FIN CUARTOS */
+
+
+/* ORDENES  */
+
+if ($action == 'orden_guardar') {
+	$save = $crud->orden_guardar();
+	if ($save)
+		echo $save;
+}
+if ($action == 'orden_archivar') {
+	$save = $crud->orden_archivar();
+	if ($save)
+		echo $save;
+}
+
+/* FIN ORDENES */
 
 ob_end_flush();

@@ -1,6 +1,7 @@
 <?php
+include "libreria.lib.php";
 session_start();
-ini_set('display_errors', 1);
+ini_set('display_errors', 0);
 Class Action {
 	private $db;
 
@@ -431,4 +432,102 @@ Class Action {
 	}
 
 	/* FIN MATERIALES */
+
+	/* CUARTOS  */
+
+	function cuarto_guardar()
+	{
+		extract($_POST);
+		$data = "";
+		foreach ($_POST as $k => $v) {
+			if (!in_array($k, array('id_cuarto')) && !is_numeric($k)) {
+				if (empty($data)) {
+					$data .= " $k='$v' ";
+				} else {
+					$data .= ", $k='$v' ";
+				}
+			}
+		}
+		$id_usuario = $_SESSION['login_id'];
+		$fecha_ahora = date('Y/m/d H:i:s');
+		if (empty($id_cuarto)) {
+			$sql = "INSERT INTO cuartos set $data, usuario_creacion = '$id_usuario', fecha_creacion = '$fecha_ahora' ";
+		} else {
+			$sql = "UPDATE cuartos set $data, usuario_modificacion = '$id_usuario', fecha_modificacion = '$fecha_ahora' where id_cuarto = $id_cuarto";
+		}
+
+		$save =  $this->db->query($sql);
+		if ($save) {
+			return 1;
+		}
+	}
+	function cuarto_archivar()
+	{
+		extract($_POST);
+		$fecha_ahora = date('Y/m/d H:i:s');
+		$id_usuario = $_SESSION['login_id'];
+		$delete = $this->db->query("UPDATE cuartos set status = 0, usuario_modificacion = '$id_usuario',fecha_modificacion = '$fecha_ahora' where id_cuarto = $id");
+		if ($delete) {
+			return 1;
+		}
+	}
+
+	/* FIN CUARTOS */
+
+	/* ORDENES  */
+
+	function orden_guardar()
+	{
+		extract($_POST);
+		$data = "";
+		foreach ($_POST as $k => $v) {
+			if (!in_array($k, array('id_orden', 'nombres_cuartos', 'nombres_materiales', 'descripcion_materiales')) && !is_numeric($k)) {
+				if (empty($data)) {
+					$data .= " $k='$v' ";
+				} else {
+					$data .= ", $k='$v' ";
+				}
+			}
+		}
+		$id_usuario = $_SESSION['login_id'];
+		$fecha_ahora = date('Y/m/d H:i:s');
+		if (empty($id_orden)) {
+			$sql = "INSERT INTO ordenes set $data, usuario_creacion = '$id_usuario', fecha_creacion = '$fecha_ahora' ";
+		} else {
+			$sql = "UPDATE ordenes set $data, usuario_modificacion = '$id_usuario', fecha_modificacion = '$fecha_ahora' where id_orden = $id_orden";
+		}
+		if ($nombres_cuartos != "") {
+			if (!empty($id_orden)) {
+				$this->db->query("DELETE FROM ordenes_partidas WHERE folio_orden='$folio' ");
+				
+			}
+			for ($i = 0; $i < count($nombres_cuartos); $i++) {
+				$sql_partidas = "INSERT INTO ordenes_partidas set folio_orden ='$folio', nombre_cuarto='" . $nombres_cuartos[$i] . "', nombre_material='" . $nombres_materiales[$i] . "', descripcion='" . $descripcion_materiales[$i] . "' ";
+				$save_partidas =  $this->db->query($sql_partidas);
+			}
+		}
+			
+		if ($save_partidas) {
+			$save =  $this->db->query($sql);
+			actualizaFolio("id_ordenes",1);
+		}
+
+		if ($save) {
+			return $folio;
+		} else {
+			return "error";
+		}
+	}
+	function orden_archivar()
+	{
+		extract($_POST);
+		$fecha_ahora = date('Y/m/d H:i:s');
+		$id_usuario = $_SESSION['login_id'];
+		$delete = $this->db->query("UPDATE ordenes set status = 0, usuario_modificacion = '$id_usuario',fecha_modificacion = '$fecha_ahora' where folio = $id");
+		if ($delete) {
+			return 1;
+		}
+	}
+
+	/* FIN ORDENES */
 }

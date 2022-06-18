@@ -58,6 +58,7 @@ include 'header.php'
                         if (!file_exists($include[0] . "/" . $include[0]."_".$include[1] . ".php")) {
                             include '404.html';
                         } else {
+                            $archivo = explode("/", $_GET['page'])[1];
                             include $include[0] . "/" . $include[0] . "_" . $include[1] . ".php";
                         }
                     }else{

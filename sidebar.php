@@ -23,7 +23,7 @@
                   </li>
                   <!-- CATALOGO -->
                   <li class="nav-item">
-                      <a href="#" class="nav-link nav-clients_new nav-clients_list nav-client_edit nav-material_new nav-material_list nav-material_edit">
+                      <a href="#" class="nav-link nav-room_new nav-room_list nav-room_edit nav-clients_new nav-clients_list nav-clients_edit nav-materials_new nav-materials_list nav-materials_edit">
                           <i class="nav-icon fas fa-list-alt"></i>
                           <p>
                               Catalogs
@@ -34,7 +34,7 @@
                           <!-- CLIENTES -->
 
                           <li class="nav-item margin-menu">
-                              <a href="#" class="nav-link nav-clients_new nav-clients_list nav-client_edit">
+                              <a href="#" class="nav-link nav-clients_new nav-clients_list nav-clients_edit">
                                   <i class="nav-icon fas fa-user-alt"></i>
                                   <p>
                                       Clients
@@ -62,7 +62,7 @@
                           <!-- MATERIALES -->
 
                           <li class="nav-item margin-menu">
-                              <a href="#" class="nav-link nav-material_new nav-material_list nav-material_edit">
+                              <a href="#" class="nav-link nav-materials_new nav-materials_list nav-materials_edit">
                                   <i class="nav-icon fas fa-user-alt"></i>
                                   <p>
                                       Materials
@@ -71,13 +71,13 @@
                               </a>
                               <ul class="nav nav-treeview">
                                   <li class="nav-item">
-                                      <a href="<?php echo SERVERURL ?>materials/new" class="nav-link nav-material_new tree-item">
+                                      <a href="<?php echo SERVERURL ?>materials/new" class="nav-link nav-materials_new tree-item">
                                           <i class="fas fa-angle-right nav-icon"></i>
                                           <p>Add New</p>
                                       </a>
                                   </li>
                                   <li class="nav-item">
-                                      <a href="<?php echo SERVERURL ?>materials/list" class="nav-link nav-material_list tree-item">
+                                      <a href="<?php echo SERVERURL ?>materials/list" class="nav-link nav-materials_list tree-item">
                                           <i class="fas fa-angle-right nav-icon"></i>
                                           <p>List</p>
                                       </a>
@@ -86,9 +86,63 @@
                           </li>
 
                           <!-- FIN MATERIALES -->
+
+                          <!-- CUARTOS -->
+
+                          <li class="nav-item margin-menu">
+                              <a href="#" class="nav-link nav-room_new nav-room_list nav-room_edit">
+                                  <i class="nav-icon fas fa-user-alt"></i>
+                                  <p>
+                                      Rooms
+                                      <i class="right fas fa-angle-left"></i>
+                                  </p>
+                              </a>
+                              <ul class="nav nav-treeview">
+                                  <li class="nav-item">
+                                      <a href="<?php echo SERVERURL ?>room/new" class="nav-link nav-room_new tree-item">
+                                          <i class="fas fa-angle-right nav-icon"></i>
+                                          <p>Add New</p>
+                                      </a>
+                                  </li>
+                                  <li class="nav-item">
+                                      <a href="<?php echo SERVERURL ?>room/list" class="nav-link nav-room_list tree-item">
+                                          <i class="fas fa-angle-right nav-icon"></i>
+                                          <p>List</p>
+                                      </a>
+                                  </li>
+                              </ul>
+                          </li>
+
+                          <!-- FIN CUARTOS -->
                       </ul>
                   </li>
                   <!-- FIN CATALOGO -->
+
+                  <!-- ORDENES -->
+                  <li class="nav-item">
+                      <a href="#" class="nav-link nav-orders_new nav-orders_list nav-orders_edit">
+                          <i class="nav-icon fas fa-laptop-house"></i>
+                          <p>
+                              Orders
+                              <i class="right fas fa-angle-left"></i>
+                          </p>
+                      </a>
+                      <ul class="nav nav-treeview">
+                          <li class="nav-item">
+                              <a href="<?php echo SERVERURL ?>orders/new/" class="nav-link nav-orders_new tree-item">
+                                  <i class="fas fa-angle-right nav-icon"></i>
+                                  <p>Add New</p>
+                              </a>
+                          </li>
+                          <li class="nav-item">
+                              <a href="<?php echo SERVERURL ?>orders/list/" class="nav-link nav-orders_list tree-item">
+                                  <i class="fas fa-angle-right nav-icon"></i>
+                                  <p>List</p>
+                              </a>
+                          </li>
+                      </ul>
+                  </li>
+                  <!-- FIN ORDENES -->
                   <?php if ($_SESSION['login_type'] == 1) : ?>
                       <li class="nav-item">
                           <a href="#" class="nav-link nav-edit_user">
@@ -121,14 +175,14 @@
   </aside>
   <script>
       $(document).ready(function() {
-          var page = 
-          '<?php
-            if (isset($_GET['page'])) {
-                $include = explode("/", $_GET['page']);
-                echo    $include[0] . "_" . $include[1];
-            } else {
-                echo 'home';
-            }   ?> ';
+          var page =
+              '<?php
+                if (isset($_GET['page'])) {
+                    $include = explode("/", $_GET['page']);
+                    echo    $include[0] . "_" . $include[1];
+                } else {
+                    echo 'home';
+                }   ?> ';
           var s = '<?php echo isset($_GET['s']) ? $_GET['s'] : '' ?>';
           if (s != '')
               page = page + '_' + s;
