@@ -389,4 +389,46 @@ Class Action {
 	}
 
 	/* FIN CLIENTES */
+
+
+	/* MATERIALES  */
+
+	function material_guardar()
+	{
+		extract($_POST);
+		$data = "";
+		foreach ($_POST as $k => $v) {
+			if (!in_array($k, array('id_material')) && !is_numeric($k)) {
+				if (empty($data)) {
+					$data .= " $k='$v' ";
+				} else {
+					$data .= ", $k='$v' ";
+				}
+			}
+		}
+		$id_usuario = $_SESSION['login_id'];
+		$fecha_ahora = date('Y/m/d H:i:s');
+		if (empty($id_material)) {
+			$sql = "INSERT INTO materiales set $data, usuario_creacion = '$id_usuario', fecha_creacion = '$fecha_ahora' ";
+		} else {
+			$sql = "UPDATE materiales set $data, usuario_modificacion = '$id_usuario', fecha_modificacion = '$fecha_ahora' where id_material = $id_material";
+		}
+
+		$save =  $this->db->query($sql);
+		if ($save) {
+			return 1;
+		}
+	}
+	function material_archivar()
+	{
+		extract($_POST);
+		$fecha_ahora = date('Y/m/d H:i:s');
+		$id_usuario = $_SESSION['login_id'];
+		$delete = $this->db->query("UPDATE materiales set status = 0, usuario_modificacion = '$id_usuario',fecha_modificacion = '$fecha_ahora' where id_material = $id");
+		if ($delete) {
+			return 1;
+		}
+	}
+
+	/* FIN MATERIALES */
 }

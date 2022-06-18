@@ -92,4 +92,20 @@ if($action == 'cliente_archivar'){
 
 /* FIN CLIENTES */
 
+
+/* MATERIALES  */
+
+if ($action == 'material_guardar') {
+	$save = $crud->material_guardar();
+	if ($save)
+		echo $save;
+}
+if ($action == 'material_archivar') {
+	$save = $crud->material_archivar();
+	if ($save)
+		echo $save;
+}
+
+/* FIN MATERIALES */
+
 ob_end_flush();
