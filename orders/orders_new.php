@@ -47,8 +47,7 @@ $alto_tabla = "1000px";
 							<?php
 							} else {
 							?>
-								<input type="text" name="cliente" class="form-control form-control-sm" value="<?php
-																												echo mysqli_este("select concat(apellidos,' ',nombre) as nombre_completo from clientes where id_cliente = '" . $cliente . "'", "nombre_completo") ?>">
+								<input type="text" name="cliente" class="form-control form-control-sm" value="<?php echo mysqli_este("select concat(apellidos,' ',nombre) as nombre_completo from clientes where id_cliente = '" . $cliente . "'", "nombre_completo") ?>">
 							<?php
 							}
 
@@ -170,11 +169,24 @@ $alto_tabla = "1000px";
 							if (isset($folio)) {
 
 								$partidas = ejecuta_consulta("select * from ordenes_partidas where folio_orden='$folio'");
-
+								$contador = 1;
 								while ($row = $partidas->fetch_assoc()) :
 							?>
 									<tr>
-										<td><input type='button' value=' - ' style='width:100%;text-align:center;' class='btn btn-danger' onClick='eliminaCampo($(this))'></td>
+										<td>
+											<?php
+											if ($archivo != "view") {
+											?>
+												<input type='button' value=' - ' style='width:100%;text-align:center;' class='btn btn-danger' onClick='eliminaCampo($(this))'>
+											<?php
+											} else {
+											?>
+												<input type='button' value=' <?php echo $contador; ?> ' style='width:100%;text-align:center;' class='btn btn-success'>
+											<?php
+												$contador++;
+											}
+											?>
+										</td>
 										<td><input class='form-control form-control' name='nombres_cuartos[]' value='<?php echo $row['nombre_cuarto'] ?>' style='width:100%;'></td>
 										<td><input class='form-control form-control' name='nombres_materiales[]' value='<?php echo $row['nombre_material']  ?>' style='width:100%;'></td>
 										<td><textarea name='descripcion_materiales[]' no cols='30' rows='2' class='form-control'><?php echo $row['descripcion']  ?></textarea></td>
