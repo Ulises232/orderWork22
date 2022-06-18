@@ -33,7 +33,7 @@
 								<button type="button" class="btn btn-default btn-sm btn-flat border-info wave-effect text-info dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
 									Action
 								</button>
-								<div class="dropdown-menu" style="">
+								<div class="dropdown-menu" >
 									<a class="dropdown-item" href="<?php echo SERVERURL ?>user/edit/<?php echo $row['id'] ?>">Edit</a>
 									<div class="dropdown-divider"></div>
 									<a class="dropdown-item" onclick="accionPaginas(' Are you sure to delete this user?','delete_user',<?php echo $row['id'] ?>)">Delete</a>
