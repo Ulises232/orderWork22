@@ -2,6 +2,7 @@
 <div class="col-lg-12">
 	<div class="card card-outline card-success">
 		<div class="card-header">
+			<b>Orders List</b>
 			<div class="card-tools">
 				<a class="btn btn-block btn-sm btn-default btn-flat border-primary" href="<?php echo SERVERURL ?>orders/new/"><i class="fa fa-plus"></i>Add Order</a>
 			</div>
