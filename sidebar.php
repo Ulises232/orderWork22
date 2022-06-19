@@ -63,7 +63,7 @@
 
                           <li class="nav-item margin-menu">
                               <a href="#" class="nav-link nav-materials_new nav-materials_list nav-materials_edit">
-                                  <i class="nav-icon fas fa-user-alt"></i>
+                                  <i class="nav-icon fas fa-cubes"></i>
                                   <p>
                                       Materials
                                       <i class="right fas fa-angle-left"></i>
@@ -91,7 +91,7 @@
 
                           <li class="nav-item margin-menu">
                               <a href="#" class="nav-link nav-room_new nav-room_list nav-room_edit">
-                                  <i class="nav-icon fas fa-user-alt"></i>
+                                  <i class="nav-icon fas fa-home"></i>
                                   <p>
                                       Rooms
                                       <i class="right fas fa-angle-left"></i>
