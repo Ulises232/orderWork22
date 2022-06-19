@@ -509,7 +509,9 @@ Class Action {
 			
 		if ($save_partidas) {
 			$save =  $this->db->query($sql);
-			actualizaFolio("id_ordenes",1);
+			if (empty($id_orden)) {
+				actualizaFolio("id_ordenes", 1);
+			}
 		}
 
 		if ($save) {
