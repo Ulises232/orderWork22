@@ -22,11 +22,11 @@ function accionPaginas(mensaje, funcion, parametros) {
 }
 
 
-function archivar($url,$id,$accion) {
+function archivar($url, $id, $accion) {
     console.log($id);
     start_load()
     $.ajax({
-        url: $url+'ajax.php?action=' + $accion + '_archivar',
+        url: $url + 'ajax.php?action=' + $accion + '_archivar',
         method: 'POST',
         data: {
             id: $id
@@ -41,4 +41,32 @@ function archivar($url,$id,$accion) {
             }
         }
     })
+}
+
+
+
+function imprimirTabla(tabla, titulo, header) {
+    start_load()
+    var _h = $('head').clone()
+    var _t = $('#' + header).clone()
+    var _p = $('#' + tabla).clone()
+    var _d = titulo;
+    _p.prepend(_d)
+    _p.prepend(_t)
+    _p.prepend(_h)
+    var nw = window.open("", "", "width=900,height=600")
+    nw.document.write(_p.html())
+    nw.document.close()
+    setTimeout(function () {
+        nw.print()
+    }, 200)
+
+    nw.onfocus = function () {
+        setTimeout(function () {
+            nw.close()
+            end_load()
+
+        }, 500);
+    }
+
 }

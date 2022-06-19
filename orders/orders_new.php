@@ -1,9 +1,6 @@
 <?php
 
 $invFolio = calculaFolio("select * from renum_parametros where 1", "id_ordenes");
-$alto_tabla = "1000px";
-
-
 ?>
 <div class="col-lg-12">
 	<div class="card">
@@ -20,39 +17,27 @@ $alto_tabla = "1000px";
 					<div class="col-md-6 border-right">
 						<div class="form-group">
 							<label for="" class="control-label">Client</label>
-							<?php
-							if ($archivo != "view") {
-							?>
-								<select onchange="agregaDatos()" class='form-control form-control-sm select2' name='cliente'>
-									<option value=""></option>
-									<?php
-									$consulta = ejecuta_consulta("select * from clientes where status='1'");
+							<select onchange="agregaDatos()" class='form-control form-control-sm select2' name='cliente'>
+								<option value=""></option>
+								<?php
+								$consulta = ejecuta_consulta("select * from clientes where status='1'");
 
-									while ($row = $consulta->fetch_assoc()) :
-										if (isset($cliente) ? $cliente : "" == $row["cliente"]) {
-											$seleccionado = "selected";
-										} else {
-											$seleccionado = "";
-										}
-										$parametros = " $seleccionado data-cPostal ='" . $row["cPostal"] . "' data-estado ='" . $row["estado"] . "' data-ciudad ='" . $row["ciudad"] . "' data-direccion ='" . $row["direccion"] . "' data-telefono1 ='" . $row["telefono1"] . "' data-telefono2 ='" . $row["telefono2"] . "' value='" . $row["id_cliente"] . "' "
-									?>
+								while ($row = $consulta->fetch_assoc()) :
+									if (isset($cliente) ? $cliente : "" == $row["cliente"]) {
+										$seleccionado = "selected";
+									} else {
+										$seleccionado = "";
+									}
+									$parametros = " $seleccionado data-cPostal ='" . $row["cPostal"] . "' data-estado ='" . $row["estado"] . "' data-ciudad ='" . $row["ciudad"] . "' data-direccion ='" . $row["direccion"] . "' data-telefono1 ='" . $row["telefono1"] . "' data-telefono2 ='" . $row["telefono2"] . "' value='" . $row["id_cliente"] . "' "
+								?>
 
-										<option <?php echo $parametros; ?>><?php echo $row['nombre'] . " " . $row['apellidos']  ?> </option>
-									<?php
-									endwhile;
+									<option <?php echo $parametros; ?>><?php echo $row['nombre'] . " " . $row['apellidos']  ?> </option>
+								<?php
+								endwhile;
 
 
-									?>
-								</select>
-							<?php
-							} else {
-							?>
-								<input type="text" name="cliente" class="form-control form-control-sm" value="<?php echo mysqli_este("select concat(apellidos,' ',nombre) as nombre_completo from clientes where id_cliente = '" . $cliente . "'", "nombre_completo") ?>">
-							<?php
-							}
-
-							?>
-
+								?>
+							</select>
 						</div>
 						<div class="form-group">
 							<div class="form-group"></div>
@@ -92,14 +77,10 @@ $alto_tabla = "1000px";
 					</div>
 
 				</div>
-				<hr>
-				<?php
-				if ($archivo != "view") {
-				?>
-					<div class="row">
-
-						<div class="col-md-5">
-
+				<div class="card card-outline card-success">
+					<div class="card-body p-0 row">
+						&nbsp;&nbsp;&nbsp;&nbsp;
+						<div class=" col-md-5">
 							<label for="" class="control-label">Rooms House </label>
 							<select class='form-control form-control-sm select2' id="cuarto_concepto">
 								<option data-descripcion=""></option>
@@ -140,97 +121,69 @@ $alto_tabla = "1000px";
 								?>
 							</select>
 						</div>
-						<div class="col-md-2">
+						<div class="col-md-1">
 							<div class="form-group">
 								<br>
 								<input class="btn btn-success btn-md" type="button" onClick="agregaCampo();" value="Add">
 							</div>
 						</div>
 					</div>
-				<?php
-					$alto_tabla = "400px";
-				}
-				?>
 
-				<br>
-				<div class="table-bordered tableFixHead" style="height: <?php echo $alto_tabla; ?>">
-					<table class="table table-striped table-bordered">
-						<thead>
-							<tr class="table-primary">
-								<th width="3%" class="text-center">#</th>
-								<th width="20%">Room House</th>
-								<th width="20%">Material</th>
-								<th class="text-center" width="60%">Description</th>
-							</tr>
-						</thead>
-						<tbody id="lista_conceptos">
-
-							<?php
-							if (isset($folio)) {
-
-								$partidas = ejecuta_consulta("select * from ordenes_partidas where folio_orden='$folio'");
-								$contador = 1;
-								while ($row = $partidas->fetch_assoc()) :
-							?>
-									<tr>
-										<td>
-											<?php
-											if ($archivo != "view") {
-											?>
-												<input type='button' value=' - ' style='width:100%;text-align:center;' class='btn btn-danger' onClick='eliminaCampo($(this))'>
-											<?php
-											} else {
-											?>
-												<input type='button' value=' <?php echo $contador; ?> ' style='width:100%;text-align:center;' class='btn btn-success'>
-											<?php
-												$contador++;
-											}
-											?>
-										</td>
-										<td><input class='form-control form-control' name='nombres_cuartos[]' value='<?php echo $row['nombre_cuarto'] ?>' style='width:100%;'></td>
-										<td><input class='form-control form-control' name='nombres_materiales[]' value='<?php echo $row['nombre_material']  ?>' style='width:100%;'></td>
-										<td><textarea name='descripcion_materiales[]' no cols='30' rows='2' class='form-control'><?php echo $row['descripcion']  ?></textarea></td>
-
+					<br>
+					<div class="card-body p-0">
+						<div class="table-bordered tableFixHead" style="height: 400px">
+							<table class="table table-striped table-bordered">
+								<thead>
+									<tr class="table-primary">
+										<th width="3%" class="text-center">#</th>
+										<th width="20%">Room House</th>
+										<th width="20%">Material</th>
+										<th class="text-center" width="60%">Description</th>
 									</tr>
-							<?php
-								endwhile;
-							}
+								</thead>
+								<tbody id="lista_conceptos">
 
-							?>
+									<?php
+									if (isset($folio)) {
 
-						</tbody>
+										$partidas = ejecuta_consulta("select * from ordenes_partidas where folio_orden='$folio'");
+										$contador = 1;
+										while ($row = $partidas->fetch_assoc()) :
+									?>
+											<tr>
+												<td><input type='button' value=' - ' style='width:100%;text-align:center;' class='btn btn-danger' onClick='eliminaCampo($(this))'></td>
+												<td><input class='form-control form-control' name='nombres_cuartos[]' value='<?php echo $row['nombre_cuarto'] ?>' style='width:100%;'></td>
+												<td><input class='form-control form-control' name='nombres_materiales[]' value='<?php echo $row['nombre_material']  ?>' style='width:100%;'></td>
+												<td><textarea name='descripcion_materiales[]' no cols='30' rows='2' class='form-control'><?php echo $row['descripcion']  ?></textarea></td>
 
-					</table>
+											</tr>
+									<?php
+										endwhile;
+									}
+
+									?>
+
+								</tbody>
+
+							</table>
+						</div>
+					</div>
 				</div>
 				<br>
-				<?php
-				if ($archivo != "view") {
-				?>
 
-					<div class="col-lg-12 text-right justify-content-center d-flex">
-						<button class="btn btn-primary mr-2">Guardar</button>
-						<button class="btn btn-secondary" type="button" onclick="location.href = ' <?php echo SERVERURL ?>orders/list/'">Cancelar</button>
-					</div>
-				<?php
-				}
-				?>
+
+				<div class="col-lg-12 text-right justify-content-center d-flex">
+					<button class="btn btn-primary mr-2">Guardar</button>
+					<button class="btn btn-secondary" type="button" onclick="location.href = ' <?php echo SERVERURL ?>orders/list/'">Cancelar</button>
+				</div>
+
 			</form>
 		</div>
 	</div>
 
 </div>
 
-<style>
-	input[type=number]::-webkit-inner-spin-button,
-	input[type=number]::-webkit-outer-spin-button {
-		-webkit-appearance: none;
-		margin: 0;
-	}
 
-	input[type=number] {
-		-moz-appearance: textfield;
-	}
-</style>
 
 <script>
 	$('#manage_orden').submit(function(e) {
@@ -262,6 +215,8 @@ $alto_tabla = "1000px";
 			}
 		})
 	})
+
+
 
 
 	function agregaDatos() {
