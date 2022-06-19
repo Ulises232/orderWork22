@@ -23,7 +23,7 @@ $invFolio = calculaFolio("select * from renum_parametros where 1", "id_ordenes")
 								$consulta = ejecuta_consulta("select * from clientes where status='1'");
 
 								while ($row = $consulta->fetch_assoc()) :
-									if (isset($cliente) ? $cliente : "" == $row["cliente"]) {
+									if (isset($cliente) && $cliente  == $row["id_cliente"]) {
 										$seleccionado = "selected";
 									} else {
 										$seleccionado = "";
